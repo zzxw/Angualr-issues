@@ -1,0 +1,1615 @@
+webpackJsonp([4,11],{
+
+/***/ 240:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _axios = __webpack_require__(241);
+
+	var _axios2 = _interopRequireDefault(_axios);
+
+	var _serviceurl = __webpack_require__(266);
+
+	var _serviceurl2 = _interopRequireDefault(_serviceurl);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	/**
+	 * return records
+	 **/
+	var baseurl = _serviceurl2.default.getServiceUrl();
+
+	function init() {
+	  _axios2.default.get("http://10.39.104.39:8761/eureka/apps/CEVC", {}).then(function (response) {
+	    var data = response.data;
+	    if (response.status === 200) {
+	      var instance = data.application.instance[0];
+	      var hostname = instance.hostName;
+	      //let ip = instance.ipAddr;
+	      var ip = '10.39.201.43';
+	      var port = instance.port.$;
+	      baseurl = 'http://' + ip + ':' + port + '/';
+	      console.log('service base url: ' + baseurl);
+	    } else {//do nothing. keep default value
+	    }
+	  }).catch(function (error) {
+	    console.log(error);
+	  });
+	}
+
+	init();
+
+	function changeUrl(url) {
+	  if (url.substring(0, 5) === 'http:') {
+	    return url;
+	  } else {
+	    return baseurl + url;
+	  }
+	}
+
+	function getRecordsByPost(url, parametersObj, successCallback, failCallback) {
+	  url = changeUrl(url);
+	  _axios2.default.post(url, parametersObj).then(function (response) {
+	    if (response.data.success) {
+	      console.log(JSON.stringify(response.data));
+	      var _records = convertRecords(response.data);
+	      successCallback(_records, response.data.totalDBRecords);
+	    } else {
+	      if (failCallback) {
+	        failCallback(records.data.exception);
+	      }
+	    }
+	  }).catch(function (error) {
+	    if (failCallback) {
+	      failCallback(error);
+	    }
+	    console.log(error);
+	  });
+	}
+
+	/**
+	* private function: to convert records String array to records map
+	**/
+	function convertRecords(data) {
+	  var fields = data.recordHead.fields; //[{"name":"ID","sqlType":4,"fullName":"ID"}]
+	  var records = [];
+	  data.records.forEach(function (item) {
+	    //item is record string array
+	    var size = fields.length;
+	    var record = {};
+	    for (var i = 0; i < size; i++) {
+	      var field = fields[i];
+	      var name = field.name.toLowerCase();
+	      record[name] = item.values[i];
+	    }
+	    records.push(record);
+	  });
+	  return records;
+	}
+
+	function getRecordsMap(url, parametersObj, successCallback, failCallback) {
+	  url = changeUrl(url);
+	  _axios2.default.get(url, parametersObj).then(function (response) {
+	    if (response.data.success) {
+	      var _records2 = convertRecords(response.data);
+	      successCallback(_records2, response.data.totalDBRecords);
+	    } else {
+	      if (failCallback) {
+	        failCallback(records.data.exception);
+	      }
+	    }
+	  }).catch(function (error) {
+	    if (failCallback) {
+	      failCallback(error);
+	    }
+	    console.log(error);
+	  });
+	}
+
+	/**
+	 * return records
+	 **/
+	function getRecordSet(url, parametersObj, successCallback) {
+	  url = changeUrl(url);
+
+	  _axios2.default.get(url, parametersObj).then(function (response) {
+	    if (response.data.success) {
+	      var _records3 = response.data.records;
+	      console.log(JSON.stringify(_records3));
+	      successCallback(_records3);
+	    }
+	  }).catch(function (error) {
+	    console.log(error);
+	  });
+	}
+
+	/**
+	 * return one record
+	 **/
+	function getOneRecord(url, parametersObj, successCallback) {
+	  getRecordSet(url, parametersObj, function (records) {
+	    if (records) {
+	      if (recods.size() > 0) {
+	        var record = records[0];
+	        successCallback(record);
+	      } else {
+	        successCallback();
+	      }
+	    } else {
+	      successCallback();
+	    }
+	  });
+	}
+
+	/**
+	 * return field value of first colum of first record
+	 **/
+	function getOneField(url, parametersObj, successCallback) {
+	  getRecordSet(url, parametersObj, function (records) {
+	    if (records) {
+	      var record = records[0];
+	      var value = record.values[0];
+	      console.log(value);
+	      successCallback(value);
+	    } else {
+	      successCallback();
+	    }
+	  });
+	}
+
+	function getFirstColValues(url, parametersObj, successCallback) {
+	  getRecordSet(url, parametersObj, function (records) {
+	    var values = [];
+	    if (records) {
+	      records.forEach(function (item) {
+	        values.push(item.values[0]);
+	      });
+	    }
+	    successCallback(values);
+	  });
+	}
+
+	exports.default = {
+	  baseurl: baseurl,
+	  getRecordsByPost: getRecordsByPost,
+	  getRecordsMap: getRecordsMap,
+	  getRecordSet: getRecordSet,
+	  getOneField: getOneField,
+	  getFirstColValues: getFirstColValues
+	};
+
+/***/ }),
+
+/***/ 267:
+/***/ (function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var options = {
+	  issue_status: {
+	    'P': 'Pending',
+	    'K': 'Package',
+	    'C': 'Close',
+	    'N': 'Canceled'
+	  },
+	  mail_status: {
+	    'P': 'Pending',
+	    'L': 'Locked',
+	    'F': 'Parsed',
+	    'E': 'Error',
+	    'I': 'Invalid'
+	  }
+	};
+
+	function getOptions(opType) {
+	  return options[opType];
+	}
+
+	function getOptionLabel(opType, opValue) {
+	  var obj = options[opType];
+	  if (!obj) {
+	    return opValue;
+	  } else {
+	    var label = obj[opValue];
+	    if (label) {
+	      return label;
+	    } else {
+	      return opValue;
+	    }
+	  }
+	}
+
+	exports.default = {
+	  getOptionLabel: getOptionLabel,
+	  getOptions: getOptions
+	};
+
+/***/ }),
+
+/***/ 280:
+/***/ (function(module, exports, __webpack_require__) {
+
+	
+	/* styles */
+	__webpack_require__(281)
+
+	var Component = __webpack_require__(225)(
+	  /* script */
+	  __webpack_require__(283),
+	  /* template */
+	  __webpack_require__(304),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\Administrator\\Desktop\\vueFinal\\src\\vue\\issue-trace.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] issue-trace.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (true) {(function () {
+	  var hotAPI = __webpack_require__(231)
+	  hotAPI.install(__webpack_require__(78), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-11d44cac", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-11d44cac", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 281:
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(282);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	if(content.locals) module.exports = content.locals;
+	// add the styles to the DOM
+	var update = __webpack_require__(223)("6f58dff9", content, false);
+	// Hot Module Replacement
+	if(true) {
+	 // When the styles change, update the <style> tags
+	 if(!content.locals) {
+	   module.hot.accept(282, function() {
+	     var newContent = __webpack_require__(282);
+	     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+	     update(newContent);
+	   });
+	 }
+	 // When the module is disposed, remove the <style> tags
+	 module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+
+/***/ 282:
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(222)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+	// exports
+
+
+/***/ }),
+
+/***/ 283:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+					value: true
+	});
+
+	var _issueTabs = __webpack_require__(284);
+
+	var _issueTabs2 = _interopRequireDefault(_issueTabs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+					data: function data() {
+									return {};
+					},
+					methods: {},
+					components: {
+									issueTrace: _issueTabs2.default
+					}
+	}; //
+	//
+	//
+	//
+	//
+
+/***/ }),
+
+/***/ 284:
+/***/ (function(module, exports, __webpack_require__) {
+
+	
+	/* styles */
+	__webpack_require__(285)
+
+	var Component = __webpack_require__(225)(
+	  /* script */
+	  __webpack_require__(287),
+	  /* template */
+	  __webpack_require__(303),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\Administrator\\Desktop\\vueFinal\\src\\components\\issue-tabs.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] issue-tabs.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (true) {(function () {
+	  var hotAPI = __webpack_require__(231)
+	  hotAPI.install(__webpack_require__(78), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-b9e43322", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-b9e43322", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 285:
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(286);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	if(content.locals) module.exports = content.locals;
+	// add the styles to the DOM
+	var update = __webpack_require__(223)("5ea828ba", content, false);
+	// Hot Module Replacement
+	if(true) {
+	 // When the styles change, update the <style> tags
+	 if(!content.locals) {
+	   module.hot.accept(286, function() {
+	     var newContent = __webpack_require__(286);
+	     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+	     update(newContent);
+	   });
+	 }
+	 // When the module is disposed, remove the <style> tags
+	 module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+
+/***/ 286:
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(222)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.tabs-container {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n}\n.tab-detail {\n  flex: 1;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+
+/***/ 287:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _issues = __webpack_require__(288);
+
+	var _issues2 = _interopRequireDefault(_issues);
+
+	var _issue = __webpack_require__(293);
+
+	var _issue2 = _interopRequireDefault(_issue);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	exports.default = {
+	  data: function data() {
+	    return {
+	      issues: this.$store.getters.getOpenIssues
+	    };
+	  },
+
+	  computed: {
+	    activeName: function activeName() {
+	      return this.$store.getters.getActiveName;
+	    }
+	  },
+	  methods: {
+	    handleEdit: function handleEdit(targetName, action) {
+	      console.log('tabs edit:' + targetName + ',' + action);
+	    },
+	    handleClick: function handleClick(tab, event) {
+	      console.log(tab);
+	    },
+	    removeTab: function removeTab(targetName) {
+	      console.log('remove tab: ' + targetName);
+	      this.$store.dispatch('closeIssue', targetName);
+	    }
+	  },
+	  components: {
+	    issues: _issues2.default,
+	    issue: _issue2.default
+	  }
+	};
+
+/***/ }),
+
+/***/ 288:
+/***/ (function(module, exports, __webpack_require__) {
+
+	
+	/* styles */
+	__webpack_require__(289)
+
+	var Component = __webpack_require__(225)(
+	  /* script */
+	  __webpack_require__(291),
+	  /* template */
+	  __webpack_require__(292),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\Administrator\\Desktop\\vueFinal\\src\\components\\issues.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] issues.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (true) {(function () {
+	  var hotAPI = __webpack_require__(231)
+	  hotAPI.install(__webpack_require__(78), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-3f1ba3b7", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-3f1ba3b7", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 289:
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(290);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	if(content.locals) module.exports = content.locals;
+	// add the styles to the DOM
+	var update = __webpack_require__(223)("69a1e3cc", content, false);
+	// Hot Module Replacement
+	if(true) {
+	 // When the styles change, update the <style> tags
+	 if(!content.locals) {
+	   module.hot.accept(290, function() {
+	     var newContent = __webpack_require__(290);
+	     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+	     update(newContent);
+	   });
+	 }
+	 // When the module is disposed, remove the <style> tags
+	 module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+
+/***/ 290:
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(222)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\n.advanceSearch{\n  background-color: grey;\n  position:absolute;\n  left:0px;\n  top:35px;\n  z-index: 100\n}\nlabel {\n  font-size: 14px;\n}\n.issues-container {\n  flex: 1;\n  display: flex;\n  flex-direction: column;\n}\n.issues-table {\n  flex: 1;\n  overflow: auto;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+
+/***/ 291:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _restcall = __webpack_require__(240);
+
+	var _restcall2 = _interopRequireDefault(_restcall);
+
+	var _options = __webpack_require__(267);
+
+	var _options2 = _interopRequireDefault(_options);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	exports.default = {
+	  data: function data() {
+	    return {
+	      pickerOptions: { //日期范围组件定制选项
+	        shortcuts: [{
+	          text: '最近一周',
+	          onClick: function onClick(picker) {
+	            var end = new Date();
+	            var start = new Date();
+	            start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+	            picker.$emit('pick', [start, end]);
+	          }
+	        }, {
+	          text: '最近30天',
+	          onClick: function onClick(picker) {
+	            var end = new Date();
+	            var start = new Date();
+	            start.setTime(start.getTime() - 3600 * 1000 * 24 * 29);
+	            picker.$emit('pick', [start, end]);
+	          }
+	        }, {
+	          text: '最近90天',
+	          onClick: function onClick(picker) {
+	            var end = new Date();
+	            var start = new Date();
+	            start.setTime(start.getTime() - 3600 * 1000 * 24 * 89);
+	            picker.$emit('pick', [start, end]);
+	          }
+	        }, {
+	          text: '最近1年',
+	          onClick: function onClick(picker) {
+	            var end = new Date();
+	            var start = new Date();
+	            start.setTime(start.getTime() - 3600 * 1000 * 24 * 364);
+	            picker.$emit('pick', [start, end]);
+	          }
+	        }]
+	      },
+	      loading: false, //loading 图标显示控制
+	      advanceSearch: false, //显示高级搜索控制
+	      tableData: [], //表格数据
+	      status: [], //issue状态清单
+	      projects: [], //系统项目清单
+	      totalRecords: 0, //记录总数
+	      query: {
+	        page: {
+	          currentPage: 1,
+	          size: 10
+	        },
+	        criteria: {
+	          search: { value: '', isRegexp: false },
+	          status: [],
+	          project: '',
+	          daterange: '' //日期范围
+	        },
+	        order: {
+	          by: '',
+	          type: ''
+	        }
+	      }
+	    };
+	  },
+	  created: function created() {
+	    //组件初始化事件
+	    console.log('issues created.');
+	    var self = this;
+	    //get project list
+	    _restcall2.default.getFirstColValues('vc/projects', {}, function (values) {
+	      values.forEach(function (item) {
+	        self.projects.push(item);
+	      });
+	    });
+
+	    //retrieve first page issues without condition
+	    self.retrieveTableData();
+
+	    self.status = _options2.default.getOptions('issue_status');
+	  },
+	  methods: {
+	    sortChanged: function sortChanged(column, prop, order) {
+	      console.log('sort changed:' + JSON.stringify(column));
+	      if (column) {
+	        this.query.order.by = column.prop;
+	        this.query.order.type = column.order;
+	      } else {
+	        this.query.order.by = '';
+	        this.query.order.type = '';
+	      }
+	      console.log('sort changed:' + JSON.stringify(this.query.order));
+	      this.retrieveTableData();
+	    },
+	    onAdvanceSearch: function onAdvanceSearch() {
+	      this.advanceSearch = !this.advanceSearch;
+	      if (!this.advanceSearch) {
+	        this.query.criteria.status = [];
+	        this.query.criteria.project = '';
+	        this.query.criteria.daterange = '';
+	        this.retrieveTableData();
+	      }
+	    },
+	    openIssue: function openIssue(row) {
+	      var issue = row;
+
+	      this.$store.dispatch('openIssue', issue);
+	    },
+	    onSubmit: function onSubmit() {
+	      this.query.page.currentPage = 1;
+	      this.retrieveTableData();
+	    },
+	    onReset: function onReset() {
+	      this.query.criteria.search.value = '';
+	      this.query.criteria.search.isRegexp = false;
+	      this.query.criteria.status = [];
+	      this.query.criteria.project = '';
+	      this.query.criteria.daterange = '';
+	      this.query.order.by = '';
+	      this.query.order.type = '';
+	      this.retrieveTableData();
+	    },
+	    handleSizeChange: function handleSizeChange(val) {
+	      console.log('page size:' + val);
+	      this.query.page.size = val;
+	      this.retrieveTableData();
+	    },
+	    handleCurrentChange: function handleCurrentChange(val) {
+	      console.log('current page:' + val);
+	      this.query.page.currentPage = val;
+	      this.retrieveTableData();
+	    },
+	    filterStatus: function filterStatus(value, row) {},
+	    retrieveTableData: function retrieveTableData() {
+	      var _this = this;
+
+	      this.loading = true;
+	      _restcall2.default.getRecordsByPost('vc/search', this.query, function (records, total) {
+	        _this.loading = false;
+	        var cats = [];
+	        var record = {}; //{"id":"5120","ce_code":"","gdb_code":"RFACE1701002179","rm_code":"#46800","subject":"xxxx","report_project":"MIZUHO BANK","report_time":"2017-03-24 07:00:31.0","report_version":"CEV3.1.0","status":"P"}
+	        records.forEach(function (item) {
+	          var cat = item;
+	          cat.codes = item.ce_code + '/' + item.gdb_code + '/' + item.rm_code;
+	          cat.code = item.ce_code === '' ? item.gdb_code === '' ? item.rm_code : item.gdb_code : item.ce_code;
+	          cats.push(cat);
+	        });
+	        _this.tableData = cats;
+	        _this.totalRecords = total;
+	      }, function (error) {
+	        _this.loading = false;
+	        alert(error);
+	      });
+	    },
+	    formatter: function formatter(row, column) {
+	      if (column.property === 'status') {
+	        return _options2.default.getOptionLabel('issue_status', row.status);
+	      } else if (column.property === 'report_time') {
+	        if (row.report_time && row.report_time.length >= 10) {
+	          return row.report_time.substring(0, 10);
+	        } else {
+	          return row.report_time;
+	        }
+	      }
+	    }
+	  },
+	  components: {}
+	};
+
+/***/ }),
+
+/***/ 292:
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', {
+	    staticClass: "issues-container"
+	  }, [_c('el-row', [_c('el-col', {
+	    attrs: {
+	      "span": 15
+	    }
+	  }, [_c('div', {
+	    on: {
+	      "keyup": function($event) {
+	        if (!('button' in $event) && _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")) { return null; }
+	        return _vm.retrieveTableData($event)
+	      }
+	    }
+	  }, [_c('el-input', {
+	    staticStyle: {
+	      "width": "500px"
+	    },
+	    attrs: {
+	      "placeholder": "模糊查询"
+	    },
+	    model: {
+	      value: (_vm.query.criteria.search.value),
+	      callback: function($$v) {
+	        _vm.$set(_vm.query.criteria.search, "value", $$v)
+	      },
+	      expression: "query.criteria.search.value"
+	    }
+	  }, [_c('i', {
+	    staticClass: "el-icon-search",
+	    attrs: {
+	      "slot": "prepend"
+	    },
+	    slot: "prepend"
+	  }), _vm._v(" "), _c('el-checkbox', {
+	    attrs: {
+	      "slot": "append"
+	    },
+	    slot: "append",
+	    model: {
+	      value: (_vm.query.criteria.search.isRegexp),
+	      callback: function($$v) {
+	        _vm.$set(_vm.query.criteria.search, "isRegexp", $$v)
+	      },
+	      expression: "query.criteria.search.isRegexp"
+	    }
+	  }, [_vm._v("正则")])], 1), _vm._v(" "), _c('el-button', {
+	    attrs: {
+	      "type": "primary",
+	      "icon": "search"
+	    },
+	    on: {
+	      "click": _vm.onSubmit
+	    }
+	  }), _vm._v(" "), _c('el-button', {
+	    attrs: {
+	      "type": "primary",
+	      "icon": "close"
+	    },
+	    on: {
+	      "click": _vm.onReset
+	    }
+	  }), _vm._v(" "), _c('el-button', {
+	    attrs: {
+	      "type": "primary",
+	      "icon": _vm.advanceSearch ? 'arrow-up' : 'arrow-down'
+	    },
+	    on: {
+	      "click": _vm.onAdvanceSearch
+	    }
+	  }, [_vm._v("高级搜索")])], 1)]), _vm._v(" "), _c('el-col', {
+	    attrs: {
+	      "span": 9
+	    }
+	  }, [_c('div', [_c('el-pagination', {
+	    attrs: {
+	      "current-page": _vm.query.page.currentPage,
+	      "page-sizes": [10, 20, 30, 40, 50],
+	      "page-size": _vm.query.page.size,
+	      "layout": "total, sizes, prev, pager, next",
+	      "total": _vm.totalRecords
+	    },
+	    on: {
+	      "size-change": _vm.handleSizeChange,
+	      "current-change": _vm.handleCurrentChange
+	    }
+	  })], 1)])], 1), _vm._v(" "), _c('el-row', {
+	    directives: [{
+	      name: "show",
+	      rawName: "v-show",
+	      value: (_vm.advanceSearch),
+	      expression: "advanceSearch"
+	    }]
+	  }, [_c('el-col', [_c('div', [_c('label', [_vm._v("项目名称")]), _vm._v(" "), _c('el-select', {
+	    attrs: {
+	      "clearable": "",
+	      "placeholder": "请选择项目"
+	    },
+	    on: {
+	      "change": _vm.retrieveTableData
+	    },
+	    model: {
+	      value: (_vm.query.criteria.project),
+	      callback: function($$v) {
+	        _vm.$set(_vm.query.criteria, "project", $$v)
+	      },
+	      expression: "query.criteria.project"
+	    }
+	  }, _vm._l((_vm.projects), function(project) {
+	    return _c('el-option', {
+	      attrs: {
+	        "label": project,
+	        "value": project
+	      }
+	    })
+	  })), _vm._v(" "), _c('label', [_vm._v("问题状态")]), _vm._v(" "), _c('el-select', {
+	    attrs: {
+	      "multiple": "",
+	      "placeholder": "状态选择"
+	    },
+	    on: {
+	      "change": _vm.retrieveTableData
+	    },
+	    model: {
+	      value: (_vm.query.criteria.status),
+	      callback: function($$v) {
+	        _vm.$set(_vm.query.criteria, "status", $$v)
+	      },
+	      expression: "query.criteria.status"
+	    }
+	  }, _vm._l((_vm.status), function(k, v) {
+	    return _c('el-option', {
+	      attrs: {
+	        "label": k,
+	        "value": v
+	      }
+	    })
+	  })), _vm._v(" "), _c('label', [_vm._v("日期范围")]), _vm._v(" "), _c('el-date-picker', {
+	    attrs: {
+	      "type": "daterange",
+	      "picker-options": _vm.pickerOptions,
+	      "placeholder": "选择日期范围"
+	    },
+	    on: {
+	      "change": _vm.retrieveTableData
+	    },
+	    model: {
+	      value: (_vm.query.criteria.daterange),
+	      callback: function($$v) {
+	        _vm.$set(_vm.query.criteria, "daterange", $$v)
+	      },
+	      expression: "query.criteria.daterange"
+	    }
+	  })], 1)])], 1), _vm._v(" "), _c('div', {
+	    staticClass: "issues-table"
+	  }, [_c('el-table', {
+	    directives: [{
+	      name: "loading",
+	      rawName: "v-loading",
+	      value: (_vm.loading),
+	      expression: "loading"
+	    }],
+	    staticStyle: {
+	      "width": "100%"
+	    },
+	    attrs: {
+	      "data": _vm.tableData,
+	      "border": "",
+	      "stripe": "",
+	      "height": "600",
+	      "element-loading-text": "拼命加载中"
+	    },
+	    on: {
+	      "sort-change": _vm.sortChanged
+	    }
+	  }, [_c('el-table-column', {
+	    attrs: {
+	      "property": "code",
+	      "label": "编号",
+	      "width": "180"
+	    },
+	    scopedSlots: _vm._u([{
+	      key: "default",
+	      fn: function(scope) {
+	        return [_c('a', {
+	          attrs: {
+	            "href": "#"
+	          },
+	          on: {
+	            "click": function($event) {
+	              _vm.openIssue(scope.row)
+	            }
+	          }
+	        }, [_vm._v(_vm._s(scope.row.codes))])]
+	      }
+	    }])
+	  }), _vm._v(" "), _c('el-table-column', {
+	    attrs: {
+	      "property": "subject",
+	      "label": "标题",
+	      "sortable": "custom"
+	    },
+	    scopedSlots: _vm._u([{
+	      key: "default",
+	      fn: function(scope) {
+	        return [_c('i', {
+	          staticClass: "icono-paperClip"
+	        }), _vm._v(_vm._s(scope.row.subject))]
+	      }
+	    }])
+	  }), _vm._v(" "), _c('el-table-column', {
+	    attrs: {
+	      "property": "priority",
+	      "label": "优先级",
+	      "width": "100",
+	      "sortable": "custom"
+	    },
+	    scopedSlots: _vm._u([{
+	      key: "default",
+	      fn: function(scope) {
+	        return [_vm._v(_vm._s(_vm._f("priority")(scope.row.priority)))]
+	      }
+	    }])
+	  }), _vm._v(" "), _c('el-table-column', {
+	    attrs: {
+	      "property": "report_project",
+	      "width": "100",
+	      "label": "项目",
+	      "sortable": "custom"
+	    }
+	  }), _vm._v(" "), _c('el-table-column', {
+	    attrs: {
+	      "property": "report_version",
+	      "width": "150",
+	      "label": "版本",
+	      "sortable": "custom"
+	    }
+	  }), _vm._v(" "), _c('el-table-column', {
+	    attrs: {
+	      "property": "report_time",
+	      "width": "120",
+	      "formatter": _vm.formatter,
+	      "label": "时间",
+	      "sortable": "custom"
+	    }
+	  }), _vm._v(" "), _c('el-table-column', {
+	    attrs: {
+	      "property": "status",
+	      "width": "100",
+	      "formatter": _vm.formatter,
+	      "label": "状态",
+	      "sortable": "custom"
+	    }
+	  })], 1)], 1)], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (true) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     __webpack_require__(231).rerender("data-v-3f1ba3b7", module.exports)
+	  }
+	}
+
+/***/ }),
+
+/***/ 293:
+/***/ (function(module, exports, __webpack_require__) {
+
+	
+	/* styles */
+	__webpack_require__(294)
+
+	var Component = __webpack_require__(225)(
+	  /* script */
+	  __webpack_require__(296),
+	  /* template */
+	  __webpack_require__(302),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\Administrator\\Desktop\\vueFinal\\src\\components\\issue.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] issue.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (true) {(function () {
+	  var hotAPI = __webpack_require__(231)
+	  hotAPI.install(__webpack_require__(78), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-43fb5aec", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-43fb5aec", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 294:
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(295);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	if(content.locals) module.exports = content.locals;
+	// add the styles to the DOM
+	var update = __webpack_require__(223)("847b5be6", content, false);
+	// Hot Module Replacement
+	if(true) {
+	 // When the styles change, update the <style> tags
+	 if(!content.locals) {
+	   module.hot.accept(295, function() {
+	     var newContent = __webpack_require__(295);
+	     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+	     update(newContent);
+	   });
+	 }
+	 // When the module is disposed, remove the <style> tags
+	 module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+
+/***/ 295:
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(222)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\npre {\n  white-space: pre-wrap;\n  word-wrap: break-word;\n  background-color: lightgrey;\n}\n.his-msg {\n  border: 1;\n  margin: 20px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+
+/***/ 296:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _restcall = __webpack_require__(240);
+
+	var _restcall2 = _interopRequireDefault(_restcall);
+
+	var _issueDocs = __webpack_require__(297);
+
+	var _issueDocs2 = _interopRequireDefault(_issueDocs);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+	exports.default = {
+	  props: ['issueFrom'],
+	  data: function data() {
+	    return {
+	      logs: [],
+	      activeNames: [],
+	      activeUrl: ''
+	    };
+	  },
+	  created: function created() {
+	    console.log('issue code:' + this.issueFrom.id);
+	    var self = this;
+	    var loges = [];
+	    _restcall2.default.getRecordsMap('vc/issue/' + this.issueFrom.id, {}, function (records) {
+	      records.forEach(function (record) {
+	        var log = {};
+	        log.id = record.id;
+	        log.subject = record.subject;
+	        log.by = record.log_by;
+	        log.time = record.log_time;
+	        self.logs.push(log);
+	      });
+	    });
+	  },
+	  computed: {
+	    baseurl: function baseurl() {
+	      return _restcall2.default.baseurl;
+	    }
+	  },
+	  methods: {
+	    changeUrl: function changeUrl(row, event, column) {
+	      this.activeUrl = _restcall2.default.baseurl + 'vc/issuelog/' + row.id;
+	    }
+	  },
+	  components: {
+	    issueDoc: _issueDocs2.default
+	  }
+	};
+
+/***/ }),
+
+/***/ 297:
+/***/ (function(module, exports, __webpack_require__) {
+
+	
+	/* styles */
+	__webpack_require__(298)
+
+	var Component = __webpack_require__(225)(
+	  /* script */
+	  __webpack_require__(300),
+	  /* template */
+	  __webpack_require__(301),
+	  /* scopeId */
+	  null,
+	  /* cssModules */
+	  null
+	)
+	Component.options.__file = "C:\\Users\\Administrator\\Desktop\\vueFinal\\src\\components\\issue-docs.vue"
+	if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+	if (Component.options.functional) {console.error("[vue-loader] issue-docs.vue: functional components are not supported with templates, they should use render functions.")}
+
+	/* hot reload */
+	if (true) {(function () {
+	  var hotAPI = __webpack_require__(231)
+	  hotAPI.install(__webpack_require__(78), false)
+	  if (!hotAPI.compatible) return
+	  module.hot.accept()
+	  if (!module.hot.data) {
+	    hotAPI.createRecord("data-v-0b472eac", Component.options)
+	  } else {
+	    hotAPI.reload("data-v-0b472eac", Component.options)
+	  }
+	})()}
+
+	module.exports = Component.exports
+
+
+/***/ }),
+
+/***/ 298:
+/***/ (function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(299);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	if(content.locals) module.exports = content.locals;
+	// add the styles to the DOM
+	var update = __webpack_require__(223)("9b8572b8", content, false);
+	// Hot Module Replacement
+	if(true) {
+	 // When the styles change, update the <style> tags
+	 if(!content.locals) {
+	   module.hot.accept(299, function() {
+	     var newContent = __webpack_require__(299);
+	     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+	     update(newContent);
+	   });
+	 }
+	 // When the module is disposed, remove the <style> tags
+	 module.hot.dispose(function() { update(); });
+	}
+
+/***/ }),
+
+/***/ 299:
+/***/ (function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(222)();
+	// imports
+
+
+	// module
+	exports.push([module.id, "\npre {\n  white-space: pre-wrap;\n  word-wrap: break-word;\n  background-color: lightgrey;\n}\n.his-msg {\n  border: 1;\n  margin: 20px;\n}\n", ""]);
+
+	// exports
+
+
+/***/ }),
+
+/***/ 300:
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _restcall = __webpack_require__(240);
+
+	var _restcall2 = _interopRequireDefault(_restcall);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = {
+	  props: ['issueFrom'],
+	  data: function data() {
+	    return {
+	      docs: []
+	    };
+	  },
+	  computed: {
+	    docUrl: function docUrl() {
+	      return _restcall2.default.baseurl + 'vc/download/';
+	    }
+	  },
+	  created: function created() {
+	    console.log('issue code:' + this.issueFrom.id);
+	    var self = this;
+
+	    var docs = [];
+	    _restcall2.default.getRecordSet('vc/docs/' + this.issueFrom.id, {}, function (records) {
+	      records.forEach(function (record) {
+	        var doc = {};
+	        doc.id = record.values[0];
+	        doc.name = record.values[1];
+	        doc.type = record.values[2];
+	        doc.description = record.values[3];
+	        self.docs.push(doc);
+	      });
+	    });
+	  },
+	  methods: {
+	    openDoc: function openDoc(docid) {
+	      console.log('open doc: ' + docid);
+	    }
+	  },
+	  components: {
+	    dao: _restcall2.default
+	  }
+	}; //
+	//
+	//
+	//
+	//
+	//
+	//
+	//
+
+/***/ }),
+
+/***/ 301:
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('p', [_vm._v("documents:")]), _vm._v(" "), _c('ul', _vm._l((_vm.docs), function(doc) {
+	    return _c('li', [_c('a', {
+	      attrs: {
+	        "href": _vm.docUrl + doc.id
+	      }
+	    }, [_vm._v(_vm._s(doc.name))])])
+	  }))])
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (true) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     __webpack_require__(231).rerender("data-v-0b472eac", module.exports)
+	  }
+	}
+
+/***/ }),
+
+/***/ 302:
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('el-collapse', {
+	    model: {
+	      value: (_vm.activeNames),
+	      callback: function($$v) {
+	        _vm.activeNames = $$v
+	      },
+	      expression: "activeNames"
+	    }
+	  }, [_c('el-collapse-item', {
+	    attrs: {
+	      "name": "summary"
+	    }
+	  }, [_c('template', {
+	    slot: "title"
+	  }, [_c('b', [_vm._v(_vm._s(_vm.issueFrom.subject))])]), _vm._v(" "), _c('el-row', [_c('el-col', {
+	    attrs: {
+	      "span": 16
+	    }
+	  }, [_c('p', [_vm._v("Status: " + _vm._s(_vm.issueFrom.status))])]), _vm._v(" "), _c('el-col', {
+	    attrs: {
+	      "span": 8
+	    }
+	  }, [_c('issue-doc', {
+	    attrs: {
+	      "issueFrom": _vm.issueFrom
+	    }
+	  })], 1)], 1)], 2)], 1), _vm._v(" "), _c('el-row', [_c('el-col', {
+	    attrs: {
+	      "span": 8
+	    }
+	  }, [_c('el-table', {
+	    staticStyle: {
+	      "width": "100%"
+	    },
+	    attrs: {
+	      "data": _vm.logs,
+	      "border": "",
+	      "highlight-current-row": "",
+	      "height": "500",
+	      "max-height": "500",
+	      "show-header": false
+	    },
+	    on: {
+	      "row-click": _vm.changeUrl
+	    }
+	  }, [_c('el-table-column', {
+	    attrs: {
+	      "property": "subject",
+	      "label": "标题",
+	      "show-overflow-tooltip": false
+	    },
+	    scopedSlots: _vm._u([{
+	      key: "default",
+	      fn: function(scope) {
+	        return [_c('div', [_c('div', {
+	          attrs: {
+	            "width": "100%"
+	          }
+	        }, [_c('i', [_vm._v(_vm._s(scope.row.by))]), _vm._v(" "), _c('i', {
+	          staticStyle: {
+	            "float": "right"
+	          }
+	        }, [_vm._v(_vm._s(scope.row.time))])]), _vm._v(" "), _c('div', {
+	          attrs: {
+	            "width": "100%"
+	          }
+	        }, [_c('b', [_vm._v(_vm._s(scope.row.subject))])])])]
+	      }
+	    }])
+	  })], 1)], 1), _vm._v(" "), _c('el-col', {
+	    attrs: {
+	      "span": 16
+	    }
+	  }, [_c('iframe', {
+	    attrs: {
+	      "src": _vm.activeUrl,
+	      "width": "100%",
+	      "height": "400px"
+	    }
+	  })])], 1)], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (true) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     __webpack_require__(231).rerender("data-v-43fb5aec", module.exports)
+	  }
+	}
+
+/***/ }),
+
+/***/ 303:
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('el-tabs', {
+	    staticClass: "tabs-container",
+	    attrs: {
+	      "value": _vm.activeName,
+	      "type": "card"
+	    },
+	    on: {
+	      "tab-click": _vm.handleClick,
+	      "tab-remove": _vm.removeTab,
+	      "edit": _vm.handleEdit
+	    }
+	  }, [_c('el-tab-pane', {
+	    staticClass: "tab-detail",
+	    attrs: {
+	      "label": "问题跟踪",
+	      "name": "second"
+	    }
+	  }, [_c('issues')], 1), _vm._v(" "), _vm._l((_vm.issues), function(item, index) {
+	    return _c('el-tab-pane', {
+	      staticClass: "tab-detail",
+	      attrs: {
+	        "label": item.code,
+	        "name": item.id,
+	        "closable": ""
+	      }
+	    }, [_c('issue', {
+	      attrs: {
+	        "issueFrom": item
+	      }
+	    })], 1)
+	  })], 2)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (true) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     __webpack_require__(231).rerender("data-v-b9e43322", module.exports)
+	  }
+	}
+
+/***/ }),
+
+/***/ 304:
+/***/ (function(module, exports, __webpack_require__) {
+
+	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+	  return _c('div', [_c('issue-trace')], 1)
+	},staticRenderFns: []}
+	module.exports.render._withStripped = true
+	if (true) {
+	  module.hot.accept()
+	  if (module.hot.data) {
+	     __webpack_require__(231).rerender("data-v-11d44cac", module.exports)
+	  }
+	}
+
+/***/ })
+
+});

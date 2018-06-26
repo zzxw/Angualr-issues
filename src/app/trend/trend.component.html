@@ -1,0 +1,29 @@
+<div class="col-md-12">
+  <div class="col-md-1">
+  <p>项目名称</p>
+  </div>
+  <div class="col-md-3">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+    aria-expanded="true">
+      请选择项目
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li *ngFor="let item of projects">
+      <a>{{item.values[0]}}</a>
+    </li>
+  </ul>
+  </div>
+  <div class="col-md-1">
+    <p>日期范围</p>
+  </div>
+  <div class="col-md-3">
+
+  </div>
+</div>
+<div></div>
+<div class="col-md-12">
+  <div id="graph" style="width:90%;height: 600px">
+
+  </div>
+</div>

@@ -1,0 +1,748 @@
+webpackJsonp([1,4],{
+
+/***/ 420:
+/***/ (function(module, exports) {
+
+function webpackEmptyContext(req) {
+	throw new Error("Cannot find module '" + req + "'.");
+}
+webpackEmptyContext.keys = function() { return []; };
+webpackEmptyContext.resolve = webpackEmptyContext;
+module.exports = webpackEmptyContext;
+webpackEmptyContext.id = 420;
+
+
+/***/ }),
+
+/***/ 421:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(509);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__environments_environment__ = __webpack_require__(550);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_app_module__ = __webpack_require__(541);
+
+
+
+
+if (__WEBPACK_IMPORTED_MODULE_2__environments_environment__["a" /* environment */].production) {
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["a" /* enableProdMode */])();
+}
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_3__app_app_module__["a" /* AppModule */]);
+//# sourceMappingURL=E:/Task/angular-issues/src/main.js.map
+
+/***/ }),
+
+/***/ 540:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var AppComponent = (function () {
+    function AppComponent() {
+        this.title = 'app works!';
+    }
+    AppComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-root',
+            template: __webpack_require__(721),
+            styles: [__webpack_require__(713)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AppComponent);
+    return AppComponent;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/app.component.js.map
+
+/***/ }),
+
+/***/ 541:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(159);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(500);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__(540);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__home_home_component__ = __webpack_require__(543);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tope_bar_tope_bar_component__ = __webpack_require__(548);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__mail_list_mail_list_component__ = __webpack_require__(545);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__code_issues_code_issues_component__ = __webpack_require__(542);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__issues_issues_component__ = __webpack_require__(544);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__version_version_component__ = __webpack_require__(549);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__statistics_statistics_component__ = __webpack_require__(547);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__angular_router__ = __webpack_require__(529);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { ServiceUrl } from './serviceUrl';
+var AppModule = (function () {
+    function AppModule() {
+    }
+    AppModule = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* NgModule */])({
+            declarations: [
+                __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_5__home_home_component__["a" /* HomeComponent */],
+                __WEBPACK_IMPORTED_MODULE_6__tope_bar_tope_bar_component__["a" /* TopeBarComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__mail_list_mail_list_component__["a" /* MailListComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__code_issues_code_issues_component__["a" /* CodeIssuesComponent */],
+                __WEBPACK_IMPORTED_MODULE_9__issues_issues_component__["a" /* IssuesComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__version_version_component__["a" /* VersionComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__statistics_statistics_component__["a" /* StatisticsComponent */]
+            ],
+            imports: [
+                __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
+                __WEBPACK_IMPORTED_MODULE_12__angular_router__["a" /* RouterModule */].forRoot([
+                    {
+                        path: '',
+                        redirectTo: 'home',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'home',
+                        component: __WEBPACK_IMPORTED_MODULE_5__home_home_component__["a" /* HomeComponent */]
+                    },
+                    {
+                        path: 'issue-mail',
+                        component: __WEBPACK_IMPORTED_MODULE_7__mail_list_mail_list_component__["a" /* MailListComponent */]
+                    },
+                    {
+                        path: 'issue-category',
+                        component: __WEBPACK_IMPORTED_MODULE_8__code_issues_code_issues_component__["a" /* CodeIssuesComponent */]
+                    },
+                    {
+                        path: 'issue-trace',
+                        component: __WEBPACK_IMPORTED_MODULE_9__issues_issues_component__["a" /* IssuesComponent */]
+                    },
+                    {
+                        path: 'issue-version',
+                        component: __WEBPACK_IMPORTED_MODULE_10__version_version_component__["a" /* VersionComponent */]
+                    },
+                    {
+                        path: 'count-trend',
+                        component: __WEBPACK_IMPORTED_MODULE_11__statistics_statistics_component__["a" /* StatisticsComponent */]
+                    }
+                ])
+            ],
+            providers: [],
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], AppModule);
+    return AppModule;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/app.module.js.map
+
+/***/ }),
+
+/***/ 542:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__code_service_service__ = __webpack_require__(797);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CodeIssuesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CodeIssuesComponent = (function () {
+    function CodeIssuesComponent(http) {
+        this.http = http;
+        this.service = new __WEBPACK_IMPORTED_MODULE_2__code_service_service__["a" /* CodeServiceService */](this.http);
+    }
+    CodeIssuesComponent.prototype.ngOnInit = function () {
+    };
+    CodeIssuesComponent.prototype.getData = function () {
+        this.data = this.service.getList();
+        console.log(this.service.getList());
+        console.log(this.data);
+        console.log('getData :1');
+    };
+    CodeIssuesComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-code-issues',
+            template: __webpack_require__(722),
+            styles: [__webpack_require__(714)]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === 'function' && _a) || Object])
+    ], CodeIssuesComponent);
+    return CodeIssuesComponent;
+    var _a;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/code-issues.component.js.map
+
+/***/ }),
+
+/***/ 543:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var HomeComponent = (function () {
+    function HomeComponent() {
+    }
+    HomeComponent.prototype.ngOnInit = function () {
+    };
+    HomeComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-home',
+            template: __webpack_require__(723),
+            styles: [__webpack_require__(715)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], HomeComponent);
+    return HomeComponent;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/home.component.js.map
+
+/***/ }),
+
+/***/ 544:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return IssuesComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var IssuesComponent = (function () {
+    function IssuesComponent() {
+    }
+    IssuesComponent.prototype.ngOnInit = function () {
+    };
+    IssuesComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-issues',
+            template: __webpack_require__(724),
+            styles: [__webpack_require__(716)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], IssuesComponent);
+    return IssuesComponent;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/issues.component.js.map
+
+/***/ }),
+
+/***/ 545:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mail_service__ = __webpack_require__(798);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailListComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MailListComponent = (function () {
+    function MailListComponent(http) {
+        this.http = http;
+        this.service = new __WEBPACK_IMPORTED_MODULE_2__mail_service__["a" /* MailService */](http);
+    }
+    MailListComponent.prototype.ngOnInit = function () {
+        this.data = this.service.getData();
+        console.log(this.data);
+    };
+    MailListComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-mail-list',
+            template: __webpack_require__(725),
+            styles: [__webpack_require__(717)]
+        }), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === 'function' && _a) || Object])
+    ], MailListComponent);
+    return MailListComponent;
+    var _a;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/mail-list.component.js.map
+
+/***/ }),
+
+/***/ 546:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return baseUrl; });
+/*const baseUrl: string = 'http://10.39.101.76:8888';
+import {Http, Response } from '@angular/http';
+export class  ServiceUrl {
+  baseUrl: string;
+  constructor(public http: Http) {
+    // this.baseUrl = 'http://10.39.101.76:8888';
+    this.init();
+  }
+  init() {
+    this.http.request('http://10.39.104.39:8761/eureka/apps/CEVC').subscribe((res: Response) => {
+      const data = res.json();
+      const instance = data.application.instance[0];
+      const hostName = instance.hostName;
+      const port = instance.port.$;
+      let ip = instance.ipAttr;
+      ip = '10.39.201.43';
+      this.baseUrl = 'http://' + ip + ':' + port + '/';
+      console.log(this.baseUrl);
+    },
+    (error: string) => {
+      console.log(error);
+    });
+  }
+  getBaseUrl(): string {
+    if (!this.hasOwnProperty('baseUrl')) {
+      this.init();
+    }
+    console.log(this);
+    console.log(this.baseUrl);
+    return this.baseUrl;
+  }
+}*/
+var baseUrl = 'http://10.39.201.43:8888/';
+//# sourceMappingURL=E:/Task/angular-issues/src/serviceUrl.js.map
+
+/***/ }),
+
+/***/ 547:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StatisticsComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var StatisticsComponent = (function () {
+    function StatisticsComponent() {
+    }
+    StatisticsComponent.prototype.ngOnInit = function () {
+    };
+    StatisticsComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-statistics',
+            template: __webpack_require__(726),
+            styles: [__webpack_require__(718)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], StatisticsComponent);
+    return StatisticsComponent;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/statistics.component.js.map
+
+/***/ }),
+
+/***/ 548:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TopeBarComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var TopeBarComponent = (function () {
+    function TopeBarComponent() {
+    }
+    TopeBarComponent.prototype.ngOnInit = function () {
+    };
+    TopeBarComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-tope-bar',
+            template: __webpack_require__(727),
+            styles: [__webpack_require__(719)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], TopeBarComponent);
+    return TopeBarComponent;
+}());
+window.onload = function () {
+    changeMenu();
+    var list = document.getElementById('top-bar').getElementsByTagName('a');
+    for (var i = 0; i < list.length; i++) {
+        myAddEvent(list[i], 'click', changeMenu);
+    }
+};
+function changeMenu() {
+    var list = document.getElementById('top-bar').getElementsByTagName('a');
+    for (var i = 0; i < list.length; i++) {
+        var item = list[i];
+        if (item.href === document.location.href) {
+            item.parentNode.classList.add('active');
+        }
+        else {
+            item.parentNode.classList.remove('active');
+        }
+    }
+}
+function myAddEvent(obj, event, func) {
+    if (obj.attachEvent) {
+        obj.attachEvent('on' + event, func);
+    }
+    else {
+        obj.addEventListener(event, func, false);
+    }
+}
+//# sourceMappingURL=E:/Task/angular-issues/src/tope-bar.component.js.map
+
+/***/ }),
+
+/***/ 549:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VersionComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var VersionComponent = (function () {
+    function VersionComponent() {
+    }
+    VersionComponent.prototype.ngOnInit = function () {
+    };
+    VersionComponent = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+            selector: 'app-version',
+            template: __webpack_require__(728),
+            styles: [__webpack_require__(720)]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], VersionComponent);
+    return VersionComponent;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/version.component.js.map
+
+/***/ }),
+
+/***/ 550:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return environment; });
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `angular-cli.json`.
+var environment = {
+    production: false
+};
+//# sourceMappingURL=E:/Task/angular-issues/src/environment.js.map
+
+/***/ }),
+
+/***/ 713:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 714:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 715:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 716:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 717:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 718:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 719:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 720:
+/***/ (function(module, exports) {
+
+module.exports = ""
+
+/***/ }),
+
+/***/ 721:
+/***/ (function(module, exports) {
+
+module.exports = "<app-tope-bar></app-tope-bar>\n<!--<app-home></app-home>\n<app-mail-list></app-mail-list>\n<app-code-issues></app-code-issues>\n<app-version></app-version>\n<app-issues></app-issues>\n<app-mail-list></app-mail-list>\n<app-code-issues></app-code-issues>-->\n<router-outlet></router-outlet>\n"
+
+/***/ }),
+
+/***/ 722:
+/***/ (function(module, exports) {
+
+module.exports = "<button (click)='getData();'>test</button>\n<div class=\"col-md-12\">\n\n  <div class=\"row\">\n    <div class=\"col-lg-8\">\n      <div class=\"col-lg-2\">\n        <span>编号类别：</span>\n      </div>\n      <div class=\"col-lg-9\">\n      <div class=\"dropdown\">\n        <button class=\"btn btn-default dropdown-toggle\" type=\"button\" id=\"dropdownMenu1\" data-toggle=\"dropdown\" aria-haspopup=\"true\"\n          aria-expanded=\"true\">\n          请选择\n          <span class=\"caret\"></span>\n        </button>\n        <ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu1\">\n\n        </ul>\n      </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"table-responsive\">\n    <table class=\"table\">\n      <thead>\n        <tr class=\"row mx-0\">\n          <th class=\"col-1\">#</th>\n          <th class=\"col-2\">编号</th>\n          <th class=\"col-5\">描述</th>\n          <th class=\"col-2\">最大编号</th>\n          <th class=\"col-2\">新编号</th>\n        </tr>\n      </thead>\n    </table>\n</div>\n"
+
+/***/ }),
+
+/***/ 723:
+/***/ (function(module, exports) {
+
+module.exports = "<div align=\"center\" style=\"font-size: 1.5em\">\n   CE问题追踪系统集编码管理，智能搜索，统计报表，版控辅助于一身\n</div>\n<div class=\"col-md-4\">\n    <img src=\"../../assets/img/category2.jpg\" class=\"image\">\n    <div align=\"center\">\n      编码管理\n    </div>\n  </div>\n<div class=\"col-md-4\">\n  <img src=\"../../assets/img/search1.jpg\" class=\"image\">\n  <div align=\"center\"> 问题追踪\n  </div>\n</div>\n<div class=\"col-md-4\">\n  <img src=\"../../assets/img/count2.jpg\" class=\"image\">\n  <div align=\"center\">\n    统计信息\n  </div>\n"
+
+/***/ }),
+
+/***/ 724:
+/***/ (function(module, exports) {
+
+module.exports = "<span class=\"glyphicon glyphicon-search\"></span>\n<input type=\"text\" class=\"form-control\" placeholder=\"模糊查询\">\n<div class=\"el-input-group__append\">\n  <label class=\"el-checkbox\">\n    <span class=\"el-checkbox__input\">\n      <span class=\"el-checkbox__inner\"></span>\n      <input type=\"checkbox\" class=\"el-checkbox__original\" value=\"\">\n    </span>\n    <span class=\"el-checkbox__label\">正则\n    </span>\n  </label>\n</div>\n<span class=\"glyphicon glyphicon-search\"></span>\n<span class=\" glyphicon glyphicon-remove\"></span>\n<span class=\"glyphicon .glyphicon-chevron-down\"></span>\n<span>高级搜索</span>>\n\n<span>共0条</span>\n <div class=\"dropdown\">\n  <button type=\"button\" class=\"btn dropdown-toggle\" id=\"dropdownMenu1\" data-toggle=\"dropdown\">10条/页\n    <span class=\"caret\"></span>\n  </button>\n  <ul class=\"dropdown-menu\" role=\"menu\" aria-labelledby=\"dropdownMenu1\">\n    <li role=\"presentation\">\n      <a role=\"menuitem\" tabindex=\"-1\" href=\"#\">Java</a>\n    </li>\n  </ul>\n</div>\n<div class=\"col-md-12\">\n  <table class=\"table\">\n    <thead>\n      <tr>\n        <th>编号</th>\n        <th>标题</th>\n        <th>优先级</th>\n        <th>项目</th>\n        <th>版本</th>\n        <th>时间</th>\n        <th>状态</th>\n      </tr>\n    </thead>\n  </table>\n</div>\n"
+
+/***/ }),
+
+/***/ 725:
+/***/ (function(module, exports) {
+
+module.exports = "<div>\n  <div class=\"col-md-5\">\n  <div class=\"input-group\" >\n    <span class=\"input-group-btn\">\n      <button class=\"btn btn-default\" type=\"button\">\n        <span class=\"glyphicon glyphicon-search\"></span>\n      </button>\n    </span>\n    <input type=\"text\" class=\"form-control\" placeholder=\"模糊查询\">\n    <span class=\"input-group-btn\">\n      <button class=\"btn btn-default\" type=\"button\">\n        <span class=\"glyphicon glyphicon-chevron-down\"></span>\n      </button>\n    </span>\n    <span class=\"input-group-btn\">\n      <button class=\"btn btn-default btn-info\" type=\"button\">\n        <span class=\"glyphicon glyphicon-search\"></span>\n      </button>\n    </span>\n    <span class=\"input-group-btn\">\n      <button class=\"btn btn-default btn-info\" type=\"button\">\n        <span class=\"glyphicon glyphicon-remove\"></span>\n      </button>\n    </span>\n  </div>\n  </div>\n</div>\n<div class=\"col-md-12\">\n<div class=\"col-md-3 row\">\n  <div style=\"float: right\" class=\"form-inline\" >\n    <span>共0条</span>\n    <span class=\"glyphicon glyphicon-chevron-left\"></span>\n    <span class=\"glyphicon glyphicon-chevron-right\"></span>\n  </div>\n</div>\n<div class=\"col-md-9\">\n\n</div>\n</div>\n"
+
+/***/ }),
+
+/***/ 726:
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  statistics works!\n</p>\n"
+
+/***/ }),
+
+/***/ 727:
+/***/ (function(module, exports) {
+
+module.exports = "<nav class=\"navbar navbar-default\" role=\"navigation\">\n  <div class=\"container-fluid\">\n    <div class=\"navbar-header\">\n      <a class=\"navbar-brand\" href=\"#\">CE Issues</a>\n    </div>\n    <div id=\"top-bar\">\n      <ul class=\"nav navbar-nav\">\n        <li class=\"active\">\n          <a routerLink=\"/home\">首页</a>\n        </li>\n        <li>\n          <a routerLink=\"/issue-mail\">邮件管理</a>\n        </li>\n        <li>\n            <a routerLink=\"/issue-category\">编码管理</a>\n        </li>\n        <li>\n            <a routerLink=\"/issue-trace\">问题追踪</a>\n        </li>\n        <li>\n            <a routerLink=\"/issue-version\">版本控制</a>\n        </li>\n        <li class=\"dropdown\">\n            <a routerLink=\"/count-trend\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n            统计信息\n            <b class=\"caret\"></b>\n            </a>\n          <ul class=\"dropdown-menu\">\n            <li>\n              <a href=\"#\">问题趋势</a>\n            </li>\n            <li>\n              <a href=\"#\">项目占比</a>\n            </li>\n            <li>\n              <a href=\"#\">类别占比</a>\n            </li>\n            <li class=\"divider\"></li>\n            <li>\n              <a href=\"#\">分离的链接</a>\n            </li>\n            <li class=\"divider\"></li>\n            <li>\n              <a href=\"#\">另一个分离的链接</a>\n            </li>\n          </ul>\n        </li>\n        <li>\n          <a href=\"#\">帮助</a>\n        </li>\n      </ul>\n    </div>\n  </div>\n</nav>\n"
+
+/***/ }),
+
+/***/ 728:
+/***/ (function(module, exports) {
+
+module.exports = "<div>请选择版本号:\n  <div class=\"row\">\n    <div class=\"col-lg-6\">\n      <div class=\"input-group\">\n        <input type=\"text\" class=\"form-control\">\n        <div class=\"input-group-btn\">\n          <button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\">\n            <span class=\"caret\"></span>\n          </button>\n          <ul class=\"dropdown-menu pull-right\">\n            <li>\n              <a href=\"#\">功能</a>\n            </li>\n          </ul>\n        </div>\n      </div>\n     </div>\n  </div>\n</div>\n<div>\n  <div class=\"col-md-8\">\n    <table class=\"table\">\n      <thead>\n        <tr>\n          <th>CE编号</th>\n          <th>标题</th>\n          <th>项目</th>\n        </tr>\n      </thead>\n    </table>\n  </div>\n  <div class=\"col-md-4\">\n    <table>\n      <thead>\n        <tr>\n          <th>代码清单</th>\n        </tr>\n      </thead>\n    </table>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ 796:
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(424);
+module.exports = __webpack_require__(421);
+
+
+/***/ }),
+
+/***/ 797:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__serviceUrl__ = __webpack_require__(546);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CodeServiceService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var CodeServiceService = (function () {
+    function CodeServiceService(http) {
+        this.http = http;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_2__serviceUrl__["a" /* baseUrl */];
+        console.log(this.baseUrl);
+    }
+    CodeServiceService.prototype.getList = function () {
+        var data = {};
+        var url = this.baseUrl + 'vc/categories';
+        console.log(url);
+        this.http.request(url).subscribe(function (res) {
+            data = res.json();
+            console.log(data);
+            console.log('observable :2');
+            return data;
+        }, function (error) {
+            console.log(error);
+        });
+        return data;
+    };
+    CodeServiceService = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* Injectable */])(), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === 'function' && _a) || Object])
+    ], CodeServiceService);
+    return CodeServiceService;
+    var _a;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/code-service.service.js.map
+
+/***/ }),
+
+/***/ 798:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(324);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__serviceUrl__ = __webpack_require__(546);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MailService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var MailService = (function () {
+    function MailService(http) {
+        this.http = http;
+        this.baseUrl = __WEBPACK_IMPORTED_MODULE_2__serviceUrl__["a" /* baseUrl */];
+        console.log(__WEBPACK_IMPORTED_MODULE_2__serviceUrl__["a" /* baseUrl */]);
+    }
+    MailService.prototype.getData = function () {
+        var url = this.baseUrl + 'vc/mails';
+        console.log(url);
+        var obj = {};
+        this.http.request(url).subscribe(function (res) {
+            obj = res.json();
+            console.log(obj);
+        }, function (error) {
+            console.log(error);
+        });
+    };
+    MailService = __decorate([
+        __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /* Injectable */])(), 
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === 'function' && _a) || Object])
+    ], MailService);
+    return MailService;
+    var _a;
+}());
+//# sourceMappingURL=E:/Task/angular-issues/src/mail.service.js.map
+
+/***/ })
+
+},[796]);
+//# sourceMappingURL=main.bundle.map

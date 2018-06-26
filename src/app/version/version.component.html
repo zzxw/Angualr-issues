@@ -1,0 +1,51 @@
+<div>请选择版本号:
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="input-group">
+        <input type="text" class="form-control">
+        <div class="input-group-btn">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu pull-right">
+            <li *ngFor="let item of versions">
+              <a (click)="showList(item.values[0]);">{{item.values[0]}}</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+     </div>
+  </div>
+</div>
+<div>
+  <div class="col-md-8">
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="col-md-2">CE编号</th>
+          <th class="col-md-5">标题</th>
+          <th class="col-md-1">项目</th>
+        </tr>
+      </thead>
+        <tbody class="table-hover">
+          <tr *ngFor="let item of data">
+            <td class="col-md-2">{{item.values[1]}}</td>
+            <td class="col-md-5">{{item.values[4]}}</td>
+            <td class="col-md-1">{{item.values[5]}}</td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <table>
+      <thead>
+        <tr>
+          <th>代码清单</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of list">
+        <td>{{item.values[0]}}</td>
+      </tbody>
+    </table>
+  </div>
+</div>

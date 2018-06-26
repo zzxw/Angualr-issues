@@ -1,0 +1,57 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">CE Issues</a>
+    </div>
+    <div id="top-bar">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a routerLink="/home">首页</a>
+        </li>
+        <li>
+          <a routerLink="/issue-mail">邮件管理</a>
+        </li>
+        <li>
+            <a routerLink="/issue-category">编码管理</a>
+        </li>
+        <li>
+            <a routerLink="/issue-trace">问题追踪</a>
+        </li>
+        <li>
+            <a routerLink="/issue-version">版本控制</a>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+            统计信息
+            <b class="caret"></b>
+            </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a routerLink="/count-trend">问题趋势</a>
+            </li>
+            <li>
+              <a routerLink="/count-projects">项目占比</a>
+            </li>
+            <li>
+              <a routerLink="/count-types">类别占比</a>
+            </li>
+          </ul>
+        </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+         帮助
+          <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a routerLink="/issue-help">问题搜索说明</a>
+          </li>
+          <li>
+            <a href="/">关于</a>
+          </li>
+        </ul>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
